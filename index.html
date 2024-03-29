@@ -107,6 +107,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-sm-12">
+                            <p>Total Price: {{cartTotal}} <i class="fa fa-eur"></i></p>
+                        </div>
 					</div>
 					<div class="col-sm-4">
 						<div class="container">
@@ -254,6 +257,10 @@
 				canAddToCart(lessons) {
 					return this.lessons.avaliability > this.checkItemCount(lessons.id);
 				},
+				cartTotal() {
+                    return this.cart.reduce((total, item) => total + (item.amount * item.lesson.price), 0);
+                },
+
 
 			},
 		}
