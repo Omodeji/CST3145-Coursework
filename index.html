@@ -99,6 +99,7 @@
 									<div class="col-sm-4">
 										<p></p>Title: {{item.lesson.title}}</p>
 										<p>quantity: {{item.amount}}</p>
+										<p><button v-on:click='removeProduct(item.lesson)'><i class="fa fa-minus-circle"></i></button></p>
 									</div>
 									<div class="col-sm-4">
 										<p>price: {{item.lesson.price}} <i class="fa fa-eur"> per hour</i></p>
@@ -130,8 +131,8 @@
 													<input type="tel" v-model="phone" class="form-control" id="phone"
 														name="phone" placeholder="Number" required>
 												</div>
-												<button type="submit" class="btn btn-primary"
-													:disabled="completeOrder">Submit</button>
+												<button type="submit" class="btn btn-primary" onclick="alert('Order Completed')"
+													:disabled="!completeOrder">Submit</button>
 												
 											</form>
 										</div>
@@ -192,6 +193,7 @@
 				removeProduct(lesson) {
 					// remove product from cart container array
 					const index = this.cart.findIndex(i => i.lesson === lesson)
+					console.log(index)
 					// check for last index 
 					if (index !== -1) {
 						// if lesson space already in cart deduct one amount 
@@ -260,6 +262,10 @@
 				cartTotal() {
                     return this.cart.reduce((total, item) => total + (item.amount * item.lesson.price), 0);
                 },
+
+				completeOrder(){
+					return /^[a-zA-Z]+$/.test(this.username) && /^\d+$/.test(this.phone)
+				}
 
 
 			},
